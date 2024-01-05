@@ -1,0 +1,6 @@
+matplotlib
+pandas
+yfinance
+pandas_ta
+claude_api
+google.generativeai
