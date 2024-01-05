@@ -203,7 +203,8 @@ def print_verdict(verdict_name, verdict):
     if json_output is not None:
         symbol = list(json_output.items())[0][1]
         result = list(json_output.items())[1][1]
-        prediction = f"{result[0]},{result[1]}"
+        prediction = ""
+        prediction = ",".join(str(r) for r in result)
     else:
         symbol = "N/A"
         prediction = "No JSON object found in the text."
@@ -357,6 +358,7 @@ def process_symbol(symbol, start_date, end_date):
     gemini_verdict = parse_gemini_prediction(symbol, prompt, gemini_prediction)
     print(gemini_verdict)
     print("")
+    print('-' * 50)
     print(f"{'AI Model':<15} {'Symbol':<15} {'Prediction'}")
     print('-' * 50)
     print_verdict("Claude", claude_verdict)
@@ -371,10 +373,11 @@ def process_symbol(symbol, start_date, end_date):
 
 def main():
   try:
-    #end_date = datetime.today()
-    end_date = datetime(2020, 4, 30)
+    end_date = datetime.today()
+    #end_date = datetime(2020, 4, 30)
     start_date = end_date - timedelta(days=120)
-    symbol = "^NSEI"
+    #symbol = "^NSEI"
+    symbol = "YESBANK.NS"
     # Process NSE index
     process_symbol(symbol, start_date, end_date)
     # Process each stock
